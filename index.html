@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Download Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .card {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="logo192.png" alt="colmena">
+            <h2>Colmena (BETA).</h2>
+            <h4>Gestiona, organiza y administra tu inventario</h4>
+        </div>
+        <button class="button" id="downloadButton">Descargar</button>
+        <span><a href="mailto:help.colmena@gmail.com">Contactar con el admin del sistema</a></span>
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Plan Basic</h5>
+                    <p class="card-text">Gestión básica de inventario</p>
+                    <h6 class="card-subtitle mb-2 text-muted">$19.999/mes</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">Gestor de inventario</li>
+                        <li class="list-group-item">Caja Registradora</li>
+                        <li class="list-group-item">Registro de Facturas</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Plan Pro</h5>
+                    <p class="card-text">Gestión avanzada de inventario</p>
+                    <h6 class="card-subtitle mb-2 text-muted">$39.999/mes</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">Generar Cotizaciones</li>
+                        <li class="list-group-item">Auto re-abastecimiento (proximo)</li>
+                        <li class="list-group-item">-----</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Plan Premium (No disponible)</h5>
+                    <p class="card-text">Gestión completa de inventario</p>
+                    <h6 class="card-subtitle mb-2 text-muted">$59.999/mes</h6>
+                    <ul class="list-group">
+                        <li class="list-group-item">-----</li>
+                        <li class="list-group-item">-----</li>
+                        <li class="list-group-item">-----</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const repoOwner = 'OrozcoOscar'; // Reemplazar con tu nombre de usuario de GitHub
+        const repoName = 'colmena'; // Reemplazar con el nombre de tu repositorio
+        let latestVersion = ""
+        fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/releases/latest`)
+            .then(response => response.json())
+            .then(data => {
+                latestVersion = data.tag_name; // La etiqueta (tag) de la última versión
+                document.querySelector("#downloadButton").innerText += " v" + latestVersion
+                console.log(`La última versión es: ${latestVersion}`);
+            })
+
+        document.getElementById("downloadButton").addEventListener("click", () => {
+            // Cambiar 'nombre-usuario' y 'nombre-repo' por tu nombre de usuario y nombre del repositorio en GitHub
+            const downloadUrl = `https://github.com/${repoOwner}/${repoName}/releases/latest/download/Colmena-Setup-${latestVersion}.exe`;
+            window.location.href = downloadUrl;
+        });
+    </script>
+</body>
+
+</html>
